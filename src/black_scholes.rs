@@ -2,7 +2,7 @@ use statrs::distribution::{ContinuousCDF, Normal};
 pub(crate)
 
 
-fn black_scholes(s:f64, k:f64, t:f64, r:f64 ,sig:f64, opt:&'static str){
+fn black_scholes(s:f64, k:f64, t:f64, r:f64 ,sig:f64) -> (f64, f64){
 
 
     // This is just for the cumulative normal create
@@ -27,16 +27,5 @@ fn black_scholes(s:f64, k:f64, t:f64, r:f64 ,sig:f64, opt:&'static str){
     let call_price = (s * nd1) - (k * (-r * t).exp()) * nd2;
     let put_price = k * ((-r * t).exp()) * nd2_neg - s * nd1_neg;
 
-
-    // choosing output
-    if opt == "call"{
-        println!("{}", call_price)
-    } else if opt == "put" {
-        println!("{}", put_price)
-    } else if opt == "both" {
-        println!("{} {}", call_price, put_price)
-    } else {
-        println!("Error with type required")
-    }
-
-}
+    (call_price ,put_price)
+ }

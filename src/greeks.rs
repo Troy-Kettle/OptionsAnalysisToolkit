@@ -20,7 +20,7 @@ pub(crate) fn greeks(s: f64, k: f64, t: f64, r: f64, sig: f64) {
         gamma(s, sig, t, d1),
         theta_call(s, k, t, r, sig, d1, nd2),
         theta_put(s, k, t, r, sig, d1, nd2_neg),
-        vega(s, t, nd1),
+        vega(s, t, nd1_neg),
         rho_call(k, t, nd2, r),
         rho_put(k, t, nd2_neg, r)
     );
@@ -48,8 +48,8 @@ pub(crate) fn greeks(s: f64, k: f64, t: f64, r: f64, sig: f64) {
         -term1 + term2
     }
 
-    fn vega(s: f64, t: f64, nd1: f64) -> f64 {
-        s * t.sqrt() * nd1
+    fn vega(s: f64, t: f64, nd1_neg: f64) -> f64 {
+        s * t.sqrt() * nd1_neg
     }
 
     fn rho_call(k: f64, t: f64, nd2: f64, r: f64) -> f64 {
@@ -60,6 +60,7 @@ pub(crate) fn greeks(s: f64, k: f64, t: f64, r: f64, sig: f64) {
         -k * t * E.powf(-r * t) * nd2_neg
     }
 
+    // PDF calculation for nd_1
     fn nd_1(d1: f64) -> f64 {
         (1.0 / (2.0 * std::f64::consts::PI).sqrt()) * E.powf(-d1 * d1 / 2.0)
     }
