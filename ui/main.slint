@@ -1,11 +1,170 @@
-export component MainWindow inherits Window {
-    width: 400px;
-    height: 300px;
+// Define the first view as a component with six input boxes
+component View1 inherits Rectangle {
+    width: 100%;
+    height: 100%;
+    background: #f0f2f5;
+    border-radius: 10px;
 
-    Text {
-        text: "Options Analysis Toolkit";
-        horizontal-alignment: center;
-        vertical-alignment: center;
+    // Container for the input boxes
+    VerticalLayout {
+        width: 600px;
+        height: parent.height - 80px;
+        spacing: 10px;
+        padding: 10px;
+        x: (parent.width - self.width) / 2;
+        y: 60px;
+
+        // Input boxes using a loop for cleaner code
+        for i in 6: Rectangle {
+            width: 100%;
+            height: 40px;
+            background: #ffffff;
+            border-radius: 5px;
+            border-width: 1px;
+            border-color: #cccccc;
+
+            HorizontalLayout {
+                padding: 10px;
+                spacing: 10px;
+
+                Text {
+                    text: "Input " + (i + 1) + ":";
+                    color: #333333;
+                    vertical-alignment: center;
+                    width: 70px;
+                }
+
+                TextInput {
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                }
+            }
+        }
     }
 }
 
+// Define the second view as a component
+component View2 inherits Rectangle {
+    width: 100%;
+    height: 100%;
+    background: #f0f2f5;
+    border-radius: 10px;
+
+    Rectangle {
+        width: 600px;
+        height: 50px;
+        background: #003366;
+        border-radius: 10px;
+        x: (parent.width - self.width) / 2;
+        Text {
+            text: "View 2 - Market Analysis";
+            color: #ffffff;
+            vertical-alignment: center;
+            horizontal-alignment: center;
+            font-size: 16px;
+        }
+    }
+
+    Text {
+        text: "This is the main content for View 2.";
+        color: #333333;
+        x: (parent.width - self.width) / 2;
+        y: 60px;
+    }
+}
+
+// Define the main window component
+export component MainWindow inherits Window {
+    width: 800px;
+    height: 500px;
+
+    property<int> current-view: 0;
+
+    HorizontalLayout {
+        width: 100%;
+        height: 100%;
+
+        // Sidebar container
+        Rectangle {
+            width: 200px;
+            height: parent.height;
+            background: #222831;
+
+            VerticalLayout {
+                width: 100%;
+                height: 100%;
+                spacing: 20px;
+                padding: 20px;
+
+                Text {
+                    text: "Navigation";
+                    color: #eeeeee;
+                    font-size: 18px;
+                    horizontal-alignment: center;
+                }
+
+                // Navigation button for Portfolio Overview
+                Rectangle {
+                    width: parent.width - 10px;
+                    height: 50px;
+                    background: root.current-view == 0 ? #1b4f72 : #222831;
+                    border-radius: 8px;
+
+                    Text {
+                        text: "Portfolio Overview";
+                        color: #eeeeee;
+                        vertical-alignment: center;
+                        horizontal-alignment: center;
+                    }
+
+                    TouchArea {
+                        width: 100%;
+                        height: 100%;
+                        clicked => { root.current-view = 0; }
+                    }
+                }
+
+                // Navigation button for Market Analysis
+                Rectangle {
+                    width: parent.width - 10px;
+                    height: 50px;
+                    background: root.current-view == 1 ? #1b4f72 : #222831;
+                    border-radius: 8px;
+
+                    Text {
+                        text: "Market Analysis";
+                        color: #eeeeee;
+                        vertical-alignment: center;
+                        horizontal-alignment: center;
+                    }
+
+                    TouchArea {
+                        width: 100%;
+                        height: 100%;
+                        clicked => { root.current-view = 1; }
+                    }
+                }
+            }
+        }
+
+        // Main view container
+        Rectangle {
+            width: parent.width - 200px;
+            height: parent.height;
+            background: #e8e8e8;
+            padding: 20px;
+
+            View1 {
+                visible: root.current-view == 0;
+                width: parent.width - 40px;
+                height: parent.height - 40px;
+            }
+
+            View2 {
+                visible: root.current-view == 1;
+                width: parent.width - 40px;
+                height: parent.height - 40px;
+            }
+        }
+    }
+}
