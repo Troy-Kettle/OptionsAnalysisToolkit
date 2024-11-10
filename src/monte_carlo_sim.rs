@@ -1,5 +1,5 @@
 use std::f64::consts::E;
-use rand::{thread_rng, Rng};
+use rand::{thread_rng};
 use rand_distr::{Normal, Distribution};
 
 pub(crate) fn monte_carlo(s: f64, k: f64, r: f64, t: f64, sig: f64) {

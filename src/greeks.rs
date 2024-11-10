@@ -9,7 +9,6 @@ pub(crate) fn greeks(s: f64, k: f64, t: f64, r: f64, sig: f64) {
     let d1 = ((s / k).ln() + (r + (sig * sig) / 2.0) * t) / (sig * t.sqrt());
     let d2 = d1 - (sig * t.sqrt());
 
-    let nd1 = normal.cdf(d1);
     let nd1_neg = normal.cdf(-d1);
     let nd2 = normal.cdf(d2);
     let nd2_neg = normal.cdf(-d2);
