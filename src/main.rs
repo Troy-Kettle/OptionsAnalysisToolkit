@@ -1,11 +1,9 @@
-slint::include_modules!();
+use yew::prelude::*;
+mod app;
 
-fn main() -> Result<(), slint::PlatformError> {
-    let app = MainWindow::new()?;
-    app.run()
+fn main() {
+    yew::Renderer::<app::App>::new().render();
 }
-
-
 
 
 
