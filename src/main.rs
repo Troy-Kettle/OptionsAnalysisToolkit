@@ -1,10 +1,11 @@
 use yew::prelude::*;
 mod app;
+mod components;
+// Import the app.rs module
 
 fn main() {
-    yew::Renderer::<app::App>::new().render();
+    yew::Renderer::<app::App>::new().render(); // Call the App component from app.rs
 }
-
 
 
 // use slint::prelude::*;
