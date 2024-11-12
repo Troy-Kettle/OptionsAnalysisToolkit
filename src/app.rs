@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use crate::components::{header::Header, counter::Counter}; // Import Header and Counter directly
+use crate::components::{header::Header, counter::Counter, greeks_table::GreeksTable};
 
 #[function_component(App)]
 pub fn app() -> Html {
@@ -7,6 +7,7 @@ pub fn app() -> Html {
         <div>
             <Header />
             <Counter />
+            <GreeksTable />
         </div>
     }
 }

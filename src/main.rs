@@ -1,6 +1,9 @@
 use yew::prelude::*;
 mod app;
 mod components;
+mod greeks;
+mod implied_volatility;
+
 // Import the app.rs module
 
 fn main() {
